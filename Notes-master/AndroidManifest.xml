@@ -1,4 +1,11 @@
+ <!--   这是整个项目的配置文件，所有Activity、Service、Receiver和Provider都要在这里登记
+        此外应用的包名、版本号和对系统权限的申请也在这里面
+-->
+
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+        XML文件声明，版本是1.0，字符编码使用UTF-8
+-->
 
 <!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
 
@@ -14,27 +21,77 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<!--
+        上面的是版权与许可声明
+-->
 
+<!--
+
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    
     package="net.micode.notes"
     android:versionCode="1"
     android:versionName="0.1" >
-
+<!--
+        xmlns:android="http://schemas.android.com/apk/res/android"为命名空间声明
+            所有以android:开头的属性（比如android:name），都要遵循这个网址里定义的安卓官方标准词典
+        package="net.micode.notes"为包名
+            是应用在整个Android世界里的唯一标识，Android会根据这个包名生成一个R.java文件，用来在Java代码里调用res里的资源
+        android:versionCode="1"是给系统看的内部版本号
+        android:versionName="0.1" 是给用户看的外部版本名
+-->
     <uses-sdk android:minSdkVersion="14" />
-
+    <!--
+            应用的最低版本限制,14对应的是Android 4.0
+    -->
+    <!--
+            下面的都是对系统的权限申请
+    -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--
+            写入外部存储的权限
+    -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <!--
+            安装快捷方式的权限
+    -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+            访问网络的权限
+    -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--
+            读取联系人的权限
+    -->
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <!--
+            允许应用管理账号的权限
+    -->
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <!--
+            账号身份验证的权限
+    -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!--
+            获取账号的权限
+    -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <!--
+            允许应用请求身份验证令牌，从而在不重复输入密码的情况下实现云端同步
+    -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!--
+            允许应用在手机重启完成后立即自动在后台运行
+    -->
 
     <application
         android:icon="@drawable/icon_app"
         android:label="@string/app_name" >
+    <!--
+            android:icon="@drawable/icon_app"设置应用的图标为icon_app图片
+            android:label="@string/app_name"设置应用的名称为strings.xml内app_name对应的文字
+    -->
         <activity
             android:name=".ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -43,11 +100,33 @@
             android:theme="@style/NoteTheme"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
-
+        <!--
+                这是用户点击图标后，系统创建的第一个页面
+                android:name=".ui.NotesListActivity"
+                    指向具体的Java类，程序会运行src/net/micode/notes/ui/NotesListActivity.java里的代码
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                    屏幕旋转或键盘弹出时，禁止销毁并重启Activity，用户横屏看手机时，便签不会因为重新加载而导致输入的数据丢失
+                android:label="@string/app_name"
+                    上文已提，略
+                android:launchMode="singleTop"
+                    启动模式，如果这个页面已经在最前面了，你再次点击它，它不会再开一个新的，而是直接复用当前的，节省内存
+                android:theme="@style/NoteTheme"
+                    指定页面的外观风格
+                android:uiOptions="splitActionBarWhenNarrow"
+                    在窄屏幕上拆分操作栏，如果手机屏幕很窄，顶部的按钮会自动挪到屏幕底部，方便操作
+                android:windowSoftInputMode="adjustPan"
+                    控制键盘弹出的行为，键盘弹出来时，整个界面会往上顶来适应键盘
+        -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!--
+                    <action android:name="android.intent.action.MAIN" />
+                        告诉系统这里是App的主入口
+                    <category android:name="android.intent.category.LAUNCHER" />
+                        让系统在手机桌面上为这个页面创建一个图标
+            -->
         </activity>
 
         <activity
@@ -55,62 +134,169 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:theme="@style/NoteTheme" >
-
+        <!--
+                android:name=".ui.NoteEditActivity"
+                    定义一个名为NoteEditActivity的页面，代码位于ui包下
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                    上文已提，略
+                android:launchMode="singleTop"
+                    上文已提，略
+                android:theme="@style/NoteTheme"
+                    上文已提，略
+        -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.item/text_note" />
                 <data android:mimeType="vnd.android.cursor.item/call_note" />
             </intent-filter>
-
+            <!--
+                    第一组规则
+                    action android:name="android.intent.action.VIEW" 
+                        动作名是“查看”
+                        意味着这个页面可以处理用户“打开并展示某条数据”的请求
+                    category android:name="android.intent.category.DEFAULT" 
+                        标准类别
+                        如果没有它，这个页面就无法通过代码里的隐式跳转被找到
+                    data android:mimeType="vnd.android.cursor.item/text_note" 
+                    data android:mimeType="vnd.android.cursor.item/call_note"
+                        这两个是数据类型匹配，告诉系统可以查看什么类型的数据
+            -->
             <intent-filter>
                 <action android:name="android.intent.action.INSERT_OR_EDIT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.item/text_note" />
                 <data android:mimeType="vnd.android.cursor.item/call_note" />
             </intent-filter>
-
+            <!--
+                    第二组规则
+                    action android:name="android.intent.action.INSERT_OR_EDIT" 
+                        动作名是“插入或编辑”
+                        这对应了两种场景：你点击“新建”按钮，或者点击已有的便签去修改它
+                    category android:name="android.intent.category.DEFAULT" 
+                        上文已提，略
+                    data android:mimeType="vnd.android.cursor.item/text_note" 
+                    data android:mimeType="vnd.android.cursor.item/call_note" 
+                        上文已提，略
+            -->
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
+            <!--
+                    第三组规则
+                    action android:name="android.intent.action.SEARCH" 
+                        动作名是“搜索”
+                        意味着这个页面可以接收搜索指令并显示结果
+                    category android:name="android.intent.category.DEFAULT" 
+                        上文已提，略
+            -->
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+            <!--
+                    插入一段“元数据”，也就是额外的备注信息
+                    android:name="android.app.searchable"
+                        备注的名字叫“searchable（可搜索配置）”
+                    android:resource="@xml/searchable"
+                        具体的配置内容在res/xml/searchable.xml文件里
+            -->
         </activity>
 
         <provider
             android:name="net.micode.notes.data.NotesProvider"
             android:authorities="micode_notes"
             android:multiprocess="true" />
-
+        <!--
+                声明一个provider组件
+                provider是Android四大组件之一，专门负责跨进程的数据共享和管理
+                android:name="net.micode.notes.data.NotesProvider"s
+                    指定该组件对应的Java类路径
+                    所有的增删改查逻辑都在这个NotesProvider.java里实现
+                android:authorities="micode_notes"
+                    这是该数据库的唯一通讯地址
+                    其他组件（如activity）想拿数据时，必须通过这个字符串找到这个仓库
+                android:multiprocess="true"
+                    允许该提供者在多个进程中运行    
+                    这意味着即便应用主程序没启动，其他进程也能快速、直接地访问数据
+        -->
         <receiver
             android:name=".widget.NoteWidgetProvider_2x"
             android:label="@string/app_widget2x2" >
+        <!--
+                声明一个receiver组件，负责在手机桌面上显示“2x2”规格便签方块
+                receiver也是Android四大组件之一，平时不运行，只有系统发了特定通知时它才会被唤醒
+                android:name=".widget.NoteWidgetProvider_2x"
+                    指定处理2x2小部件逻辑的Java类，位于widget下
+                android:label="@string/app_widget2x2" 
+                    手机桌面上显示“2x2”规格便签方块时的名字
+
+        -->
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
                 <action android:name="android.intent.action.PRIVACY_MODE_CHANGED" />
             </intent-filter>
-
+            <!--
+                    定义该receiver感兴趣的信号列表
+                    action android:name="android.appwidget.action.APPWIDGET_UPDATE" 
+                        系统发出的“更新”信号
+                    action android:name="android.appwidget.action.APPWIDGET_DELETED" 
+                        系统发出的“删除”信号
+                    action android:name="android.intent.action.PRIVACY_MODE_CHANGED"
+                        隐私模式切换信号
+            -->
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_2x_info" />
+            <!--
+                    插入一段“元数据”，也就是额外的备注信息
+                    和上面那个一样
+            -->
         </receiver>
-        <receiver
+                <receiver
             android:name=".widget.NoteWidgetProvider_4x"
             android:label="@string/app_widget4x4" >
+        <!--
+                声明一个receiver组件，负责在手机桌面上显示“4x4”规格便签方块
+                和上面的2x2类似，只不过这个尺寸更大，可以显示更多内容
 
+                android:name=".widget.NoteWidgetProvider_4x"
+                    指向处理4x4桌面小部件逻辑的Java类
+
+                android:label="@string/app_widget4x4"
+                    桌面上显示该小部件时的名称
+        -->
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
                 <action android:name="android.intent.action.PRIVACY_MODE_CHANGED" />
             </intent-filter>
+            <!--
+                    定义该receiver可以接收的系统广播
+
+                    APPWIDGET_UPDATE
+                        当桌面小部件需要刷新时触发
+
+                    APPWIDGET_DELETED
+                        当用户从桌面移除小部件时触发
+
+                    PRIVACY_MODE_CHANGED
+                        当系统隐私模式发生变化时触发
+            -->
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_4x_info" />
+            <!--
+                    指定该桌面小部件的配置信息
+
+                    android:name="android.appwidget.provider"
+                        固定写法，表示这是一个小部件配置
+
+                    android:resource="@xml/widget_4x_info"
+                        实际配置文件路径，定义大小、刷新频率、布局等
+            -->
         </receiver>
 
         <receiver android:name=".ui.AlarmInitReceiver" >
@@ -118,11 +304,35 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <!--
+                声明一个广播接收器，用于监听手机开机事件
+
+                android:name=".ui.AlarmInitReceiver"
+                    对应的Java类，负责初始化提醒（闹钟）相关逻辑
+
+                BOOT_COMPLETED
+                    系统广播，在设备启动完成后发送
+
+                作用：
+                    手机重启后，重新注册或恢复所有便签提醒（否则闹钟会失效）
+        -->
 
         <receiver
             android:name="net.micode.notes.ui.AlarmReceiver"
             android:process=":remote" >
         </receiver>
+        <!--
+                声明一个用于接收闹钟触发的receiver
+
+                android:name="net.micode.notes.ui.AlarmReceiver"
+                    具体处理闹钟事件的类，比如弹出提醒、通知等
+
+                android:process=":remote"
+                    让该receiver运行在一个独立进程中（子进程）
+
+                作用：
+                    即使主应用进程被杀死，闹钟仍然可以正常触发，提高可靠性
+        -->
 
         <activity
             android:name=".ui.AlarmAlertActivity"
@@ -130,6 +340,22 @@
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Holo.Wallpaper.NoTitleBar" >
         </activity>
+        <!--
+                定义一个用于显示闹钟提醒界面的Activity
+
+                android:name=".ui.AlarmAlertActivity"
+                    处理闹钟弹窗界面的类
+
+                android:label="@string/app_name"
+                    页面标题
+
+                android:launchMode="singleInstance"
+                    单实例模式
+                    整个系统中只会存在一个该Activity实例，并且独占一个任务栈
+
+                android:theme="@android:style/Theme.Holo.Wallpaper.NoTitleBar"
+                    使用无标题栏的全屏主题（更像弹窗或锁屏提醒）
+        -->
 
         <activity
             android:name="net.micode.notes.ui.NotesPreferenceActivity"
@@ -137,14 +363,51 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Holo.Light" >
         </activity>
+        <!--
+                定义应用的“设置页面”
+
+                android:name="net.micode.notes.ui.NotesPreferenceActivity"
+                    设置界面的实现类
+
+                android:label="@string/preferences_title"
+                    页面标题，一般显示为“设置”
+
+                android:launchMode="singleTop"
+                    如果该页面已经在栈顶，则复用，不重新创建
+
+                android:theme="@android:style/Theme.Holo.Light"
+                    使用浅色主题
+        -->
 
         <service
             android:name="net.micode.notes.gtask.remote.GTaskSyncService"
             android:exported="false" >
         </service>
+        <!--
+                声明一个后台服务（Service）
+
+                android:name="net.micode.notes.gtask.remote.GTaskSyncService"
+                    用于和远程服务（如Google Tasks）进行数据同步
+
+                android:exported="false"
+                    表示该服务不能被其他应用调用（只允许本应用内部使用）
+
+                作用：
+                    在后台自动同步便签数据，无需用户手动操作
+        -->
 
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".ui.NoteEditActivity" />
-    </application>
-</manifest>
+        <!--
+                设置应用的默认搜索处理页面
+
+                android:name="android.app.default_searchable"
+                    固定字段，表示默认搜索入口
+
+                android:value=".ui.NoteEditActivity"
+                    当用户发起搜索时，默认由NoteEditActivity来处理
+
+                作用：
+                    将系统搜索功能与应用内搜索逻辑绑定
+        -->
