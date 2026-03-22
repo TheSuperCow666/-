@@ -1,9 +1,25 @@
+# 该项目使用Eclipse IDE开发
+
 # generated files
+# 就是编译生成的文件
 bin/
+# Binary 
+# .class字节码文件、Android专属的.dex可执行文件、编译打包好的资源文件，以及最终可以直接安装到手机上的.apk 安装包都在这里
 gen/
+# Generated
+# R.java文件，作为字典把在res文件夹里放的图片、布局XML、字符串等资源，自动映射成代码里能调用的数字ID
 
 # Local configuration file (sdk path, etc)
+# 本地工程配置文件
 project.properties
+# Android ADT插件专属的项目属性文件
+# 主要记录当前项目使用的Android SDK编译版本，以及有没有引用其他的本地库项目、混淆规则文件的路径等
 .settings/
+# Eclipse编辑器存放当前项目“首选项”的隐藏文件夹
+# 记录代码格式化规则（缩进是空格还是Tab）、编译器警告的严格程度、文件的默认编码格式等设置
 .classpath
+# Java的构建路径描述文件
+# 告诉 Eclipse源代码在哪（src/和gen/）、编译输出到哪（bin/）、并且记录了项目引用了哪些第三方的.jar包及其具体的磁盘存放路径
 .project
+# Eclipse的核心工程身份描述文件
+# 记录项目的名称、使用哪些构建器，以及项目的各种特性
