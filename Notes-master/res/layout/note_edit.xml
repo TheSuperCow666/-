@@ -15,22 +15,26 @@
      limitations under the License.
 -->
 
+<!-- 便签编辑主布局：FrameLayout根布局，包含标题区、编辑区、背景色选择器、字体大小选择器 -->
 <FrameLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/list_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 核心内容容器：垂直线性布局，包含标题区和编辑区 -->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <!-- 标题区：显示修改时间、提醒图标、提醒时间、颜色设置按钮 -->
         <LinearLayout
             android:id="@+id/note_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
+            <!-- 修改时间文本：占1份宽度，左垂直居中，右间距8dip -->
             <TextView
                 android:id="@+id/tv_modified_date"
                 android:layout_width="0dip"
@@ -40,6 +44,7 @@
                 android:layout_marginRight="8dip"
                 android:textAppearance="@style/TextAppearanceSecondaryItem" />
 
+            <!-- 提醒图标：垂直居中，背景为title_alert -->
             <ImageView
                 android:id="@+id/iv_alert_icon"
                 android:layout_width="wrap_content"
@@ -47,6 +52,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/title_alert" />
 
+            <!-- 提醒时间文本：垂直居中，左间距2dip，右间距8dip -->
             <TextView
                 android:id="@+id/tv_alert_date"
                 android:layout_width="wrap_content"
@@ -56,6 +62,7 @@
                 android:layout_marginRight="8dip"
                 android:textAppearance="@style/TextAppearanceSecondaryItem" />
 
+            <!-- 颜色设置按钮：居中显示，背景为bg_btn_set_color -->
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,17 +70,20 @@
                 android:background="@drawable/bg_btn_set_color" />
         </LinearLayout>
 
+        <!-- 编辑区容器：垂直线性布局，包含分隔线和滚动编辑区 -->
         <LinearLayout
             android:id="@+id/sv_note_edit"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
+            <!-- 顶部分隔线：高度7dip，背景为bg_color_btn_mask -->
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="7dip"
                 android:background="@drawable/bg_color_btn_mask" />
 
+            <!-- 滚动编辑区：无滚动条，无过度滚动，占1份高度 -->
             <ScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="0dip"
@@ -87,6 +97,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
+                    <!-- 自定义便签编辑框：无背景，自动识别链接，最小12行，行间距1.2倍 -->
                     <net.micode.notes.ui.NoteEditText
                         android:id="@+id/note_edit_view"
                         android:layout_width="fill_parent"
@@ -99,6 +110,7 @@
                         android:textAppearance="@style/TextAppearancePrimaryItem"
                         android:lineSpacingMultiplier="1.2" />
 
+                    <!-- 编辑列表容器：默认隐藏，左负边距-10dip -->
                     <LinearLayout
                         android:id="@+id/note_edit_list"
                         android:layout_width="fill_parent"
@@ -109,6 +121,7 @@
                 </LinearLayout>
             </ScrollView>
 
+            <!-- 底部分隔线：高度7dip，背景为bg_color_btn_mask -->
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="7dip"
@@ -116,6 +129,7 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- 背景色设置按钮：右上角显示，高度43dip -->
     <ImageView
         android:id="@+id/btn_set_bg_color"
         android:layout_height="43dip"
@@ -123,6 +137,7 @@
         android:background="@drawable/bg_color_btn_mask"
         android:layout_gravity="top|right" />
 
+    <!-- 背景色选择器面板：默认隐藏，右上角显示，包含黄/蓝/白/绿/红5种颜色选项 -->
     <LinearLayout
         android:id="@+id/note_bg_color_selector"
         android:layout_width="wrap_content"
@@ -133,6 +148,7 @@
         android:layout_gravity="top|right"
         android:visibility="gone">
 
+        <!-- 黄色背景选项：含选中标记（默认隐藏） -->
         <FrameLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
@@ -154,6 +170,7 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+        <!-- 蓝色背景选项：含选中标记（默认隐藏） -->
         <FrameLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
@@ -175,6 +192,7 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+        <!-- 白色背景选项：含选中标记（默认隐藏） -->
         <FrameLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
@@ -196,6 +214,7 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+        <!-- 绿色背景选项：含选中标记（默认隐藏） -->
         <FrameLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
@@ -216,6 +235,7 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+        <!-- 红色背景选项：含选中标记（默认隐藏） -->
         <FrameLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
@@ -237,6 +257,7 @@
         </FrameLayout>
     </LinearLayout>
 
+    <!-- 字体大小选择器：默认隐藏，底部显示，包含小/默认/大/超大4种字号选项 -->
     <LinearLayout
         android:id="@+id/font_size_selector"
         android:layout_width="fill_parent"
@@ -245,6 +266,7 @@
         android:layout_gravity="bottom"
         android:visibility="gone">
 
+        <!-- 小字号选项：含图标+文本+选中标记（默认隐藏） -->
         <FrameLayout
             android:id="@+id/ll_font_small"
             android:layout_width="0dip"
@@ -283,6 +305,8 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+        
+        <!-- 默认字号选项：含图标+文本+选中标记（默认隐藏） -->
         <FrameLayout
             android:id="@+id/ll_font_normal"
             android:layout_width="0dip"
@@ -321,6 +345,7 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+         <!-- 大字号选项：含图标+文本+选中标记（默认隐藏） -->
         <FrameLayout
             android:id="@+id/ll_font_large"
             android:layout_width="0dip"
@@ -359,6 +384,7 @@
                 android:src="@drawable/selected" />
         </FrameLayout>
 
+        <!-- 超大字号选项：含图标+文本+选中标记（默认隐藏） -->
         <FrameLayout
             android:id="@+id/ll_font_super"
             android:layout_width="0dip"
