@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- 便签列表页面菜单：包含新建文件夹、导出文本、同步、设置、搜索等功能选项 -->
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 新建便签文件夹菜单项（对应字符串为menu_create_folder，语义一致） -->
+    <item
+        android:id="@+id/menu_new_folder"
+        android:title="@string/menu_create_folder"/>
+
+     <!-- 导出便签文本菜单项 -->
+    <item
+        android:id="@+id/menu_export_text"
+        android:title="@string/menu_export_text"/>
+
+     <!-- 便签同步菜单项 -->
+    <item
+        android:id="@+id/menu_sync"
+        android:title="@string/menu_sync"/>
+
+    
+    <!-- 便签设置菜单项 -->
+    <item
+        android:id="@+id/menu_setting"
+        android:title="@string/menu_setting" />
+
+    <!-- 搜索便签菜单项 -->
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/menu_search"/>
+</menu>
