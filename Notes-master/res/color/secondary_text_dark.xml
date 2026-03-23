@@ -15,6 +15,8 @@
      limitations under the License.
 -->
 
+<!-- 深色主题下次要文本的颜色选择器（无状态，仅默认值） -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- 次要文本默认颜色：半透明黑色（ARGB: #50000000，alpha≈20%） -->
   <item android:color="#50000000" />
 </selector>
