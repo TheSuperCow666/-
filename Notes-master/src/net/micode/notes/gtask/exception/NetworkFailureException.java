@@ -16,17 +16,33 @@
 
 package net.micode.notes.gtask.exception;
 
+/**
+ * 表示网络操作失败时抛出的受检异常。
+ * 例如在同步过程中网络连接异常、请求超时等情况使用。
+ */
 public class NetworkFailureException extends Exception {
     private static final long serialVersionUID = 2107610287180234136L;
 
+    /**
+     * 构造一个无详细消息的异常。
+     */
     public NetworkFailureException() {
         super();
     }
 
+    /**
+     * 构造一个带有指定详细消息的异常。
+     * @param paramString 详细消息
+     */
     public NetworkFailureException(String paramString) {
         super(paramString);
     }
 
+    /**
+     * 构造一个带有指定详细消息和原因的异常。
+     * @param paramString 详细消息
+     * @param paramThrowable 原因
+     */
     public NetworkFailureException(String paramString, Throwable paramThrowable) {
         super(paramString, paramThrowable);
     }
