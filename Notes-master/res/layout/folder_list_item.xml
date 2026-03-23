@@ -15,11 +15,13 @@
      limitations under the License.
 -->
 
+<!-- 文件夹列表项布局：线性布局，用于展示文件夹名称，最小高度50dip -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="50dip" >
 
+    <!-- 文件夹名称文本控件：全屏宽高，居中显示，使用PrimaryItem文本样式 -->
     <TextView
         android:id="@+id/tv_folder_name"
         android:layout_width="match_parent"
