@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+<!--  Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
-
+ -->
 <resources>
-    <color name="user_query_highlight">#335b5b5b</color>
+<!--  用户查询文本高亮色：ARGB格式 #33(透明度)5b5b5b(深灰色)  -->
+<color name="user_query_highlight">#335b5b5b</color>
 </resources>
