@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- 【中文-中国】应用基础信息字符串 -->
+    <string name="app_name">便签</string>                          <!-- 应用名称（对应英文：Notes） -->
+    <string name="app_widget2x2">便签2x2</string>                 <!-- 2x2尺寸桌面小部件名称（对应英文：Notes 2x2） -->
+    <string name="app_widget4x4">便签4x4</string>                 <!-- 4x4尺寸桌面小部件名称（对应英文：Notes 4x4） -->
+    <string name="widget_havenot_content">没有关联内容，点击新建便签。</string> <!-- 小部件无关联便签提示（对应英文：No associated note found...） -->
+    <string name="widget_under_visit_mode">访客模式下，便签内容不可见</string> <!-- 小部件隐私模式提示（对应英文：Privacy mode...） -->
+    <string name="notelist_string_info">...</string>                <!-- 便签列表占位信息（对应英文：...） -->
+    <string name="notelist_menu_new">新建便签</string>              <!-- 新建便签菜单文本（对应英文：Add note） -->
+    
+    <!-- 【中文-中国】提醒相关字符串 -->
+    <string name="delete_remind_time_message">成功删除提醒</string> <!-- 删除提醒成功提示（对应英文：Delete reminder successfully） -->
+    <string name="set_remind_time_message">创建提醒</string>        <!-- 设置提醒文案（对应英文：Set reminder） -->
+    <string name="note_alert_expired">已过期</string>              <!-- 提醒过期标识（对应英文：Expired） -->
+    
+    <!-- 【中文-中国】日期时间格式字符串 -->
+    <string name="format_date_ymd">yyyyMMdd</string>                <!-- 年月日格式（无分隔符，与英文一致） -->
+    <string name="format_datetime_mdhm">MM月dd日 kk:mm</string>     <!-- 月日+时分格式（中文本地化：补充“月/日”单位） -->
+    
+    <!-- 【中文-中国】提醒弹窗相关字符串 -->
+    <string name="notealert_ok">知道了</string>                     <!-- 提醒弹窗确认按钮（对应英文：Got it） -->
+    <string name="notealert_enter">查看</string>                    <!-- 提醒弹窗查看按钮（对应英文：Take a look） -->
+    
+    <!-- 【中文-中国】便签链接跳转字符串 -->
+    <string name="note_link_tel">呼叫电话</string>                  <!-- 电话链接跳转文案（对应英文：Call） -->
+    <string name="note_link_email">发送邮件</string>                <!-- 邮件链接跳转文案（对应英文：Send email） -->
+    <string name="note_link_web">浏览网页</string>                  <!-- 网页链接跳转文案（对应英文：Browse web） -->
+    <string name="note_link_other">打开地图</string>                <!-- 地图链接跳转文案（对应英文：Open map） -->
+    
+    <!-- note list string：【中文-中国】便签列表相关字符串 -->
+    <string name="menu_create_folder">新建文件夹</string>           <!-- 新建文件夹菜单文本（对应英文：New Folder） -->
+    <string name="menu_export_text">导出文本</string>               <!-- 导出文本菜单文本（对应英文：Export text） -->
+    <string name="menu_sync">同步</string>                         <!-- 同步菜单文本（对应英文：Sync） -->
+    <string name="menu_sync_cancel">取消同步</string>              <!-- 取消同步菜单文本（对应英文：Cancel syncing） -->
+    <string name="menu_setting">设置</string>                      <!-- 设置菜单文本（对应英文：Settings） -->
+    <string name="menu_search">搜索</string>                       <!-- 搜索菜单文本（对应英文：Search） -->
+    <string name="menu_delete">删除</string>                       <!-- 删除菜单文本（对应英文：Delete） -->
+    <string name="menu_move">移动到文件夹</string>                 <!-- 移动到文件夹菜单文本（对应英文：Move to folder） -->
+    <string name="menu_select_title">选中了 %d 项</string>          <!-- 选中数量标题（%d为选中数，中文本地化：补充“项”单位） -->
+    <string name="menu_select_none">没有选中项，操作无效</string>    <!-- 未选中内容操作无效提示（对应英文：Nothing selected...） -->
+    <string name="menu_select_all">全选</string>                   <!-- 全选菜单文本（对应英文：Select all） -->
+    <string name="menu_deselect_all">取消全选</string>               <!-- 取消全选菜单文本（对应英文：Deselect all） -->
+    <string name="menu_font_size">文字大小</string>                 <!-- 字体大小菜单文本（对应英文：Font size） -->
+    <string name="menu_font_small">小</string>                      <!-- 小字体选项（对应英文：Small） -->
+    <string name="menu_font_normal">正常</string>                  <!-- 中字体选项（对应英文：Medium） -->
+    <string name="menu_font_large">大</string>                     <!-- 大字体选项（对应英文：Large） -->
+    <string name="menu_font_super">超大</string>                   <!-- 超大字体选项（对应英文：Super） -->
+    <string name="menu_list_mode">进入清单模式</string>             <!-- 进入清单模式菜单文本（对应英文：Enter check list） -->
+    <string name="menu_normal_mode">退出清单模式</string>          <!-- 退出清单模式菜单文本（对应英文：Leave check list） -->
+    <string name="menu_folder_view">查看文件夹</string>             <!-- 查看文件夹菜单文本（对应英文：View folder） -->
+    <string name="menu_folder_delete">刪除文件夹</string>           <!-- 删除文件夹菜单文本（注：“刪”为繁体，对应英文：Delete folder） -->
+    <string name="menu_folder_change_name">修改文件夹名称</string>  <!-- 重命名文件夹菜单文本（对应英文：Change folder name） -->
+    <string name="folder_exist">文件夹 %1$s 已存在，请重新命名</string> <!-- 文件夹已存在提示（%1$s为文件夹名，对应英文：The folder %1$s exist...） -->
+    <string name="menu_share">分享</string>                        <!-- 分享菜单文本（对应英文：Share） -->
+    <string name="menu_send_to_desktop">发送到桌面</string>          <!-- 发送到桌面菜单文本（对应英文：Send to home） -->
+    <string name="menu_alert">提醒我</string>                       <!-- 设置提醒菜单文本（对应英文：Remind me） -->
+    <string name="menu_remove_remind">删除提醒</string>             <!-- 删除提醒菜单文本（对应英文：Delete reminder） -->
+    <string name="menu_title_select_folder">选择文件夹</string>     <!-- 选择文件夹标题（对应英文：Select folder） -->
+    <string name="menu_move_parent_folder">上一级文件夹</string>    <!-- 上级文件夹选项（对应英文：Parent folder） -->
+    <string name="info_note_enter_desktop">已添加到桌面</string>    <!-- 便签添加到桌面成功提示（对应英文：Note added to home） -->
+    <string name="alert_title_delete">删除</string>                 <!-- 删除选中便签弹窗标题（对应英文：Delete selected notes） -->
+    <string name="alert_message_delete_notes">确认要删除所选的 %d 条便签吗?</string> <!-- 删除选中便签确认（%d为数量，对应英文：Confirm to delete...） -->
+    <string name="alert_message_delete_note">确认要删除该条便签吗?</string> <!-- 删除单条便签确认（对应英文：Confirm to delete this note?） -->
+    <string name="alert_message_delete_folder">确认删除文件夹及所包含的便签吗？</string> <!-- 删除文件夹确认弹窗文案（对应英文：Confirm to delete folder...） -->
+    <string name="format_move_notes_to_folder">已将所选 %1$d 条便签移到 %2$s 文件夹</string> <!-- 移动便签成功提示（%1$d数量/%2$s文件夹名，对应英文：Have moved...） -->
+    
+    <!-- export text：【中文-中国】导出相关错误提示字符串 -->
+    <string name="error_sdcard_unmounted">SD卡被占用，不能操作</string> <!-- SD卡未挂载错误（对应英文：SD card busy...） -->
+    <string name="error_sdcard_export">导出文本时发生错误，请检查SD卡</string> <!-- SD卡导出失败错误（对应英文：Export failed...） -->
+    <string name="error_note_not_exist">要查看的便签不存在</string>  <!-- 便签不存在错误（对应英文：The note is not exist） -->
+    <string name="error_note_empty_for_clock">不能为空便签设置闹钟提醒</string> <!-- 空便签无法设置提醒错误（对应英文：Sorry, can not set clock...） -->
+    <string name="error_note_empty_for_send_to_desktop">不能将空便签发送到桌面</string> <!-- 空便签无法发送到桌面错误（对应英文：Sorry, can not send...） -->
+    <string name="success_sdcard_export">导出成功</string>          <!-- 导出成功提示（对应英文：Export successful） -->
+    <string name="failed_sdcard_export">导出失败</string>           <!-- 导出失败提示（对应英文：Export fail） -->
+    <string name="format_exported_file_location">已将文本文件(%1$s)输出至SD卡(%2$s)目录</string> <!-- 导出文件路径提示（%1$s文件名/%2$s路径，对应英文：Export text file...） -->
+    
+    <!-- Sync：【中文-中国】同步相关字符串 -->
+    <string name="ticker_syncing">同步便签...</string>              <!-- 同步中通知文案（对应英文：Syncing notes...） -->
+    <string name="ticker_success">同步成功</string>                 <!-- 同步成功通知文案（对应英文：Sync is successful） -->
+    <string name="ticker_fail">同步失败</string>                   <!-- 同步失败通知文案（对应英文：Sync is failed） -->
+    <string name="ticker_cancel">同步已取消</string>               <!-- 同步取消通知文案（对应英文：Sync is canceled） -->
+    <string name="success_sync_account">与%1$s同步成功</string>      <!-- 账号同步成功提示（%1$s为账号名，对应英文：Sync is successful with account...） -->
+    <string name="error_sync_network">同步失败，请检查网络和帐号设置</string> <!-- 同步网络错误（对应英文：Sync failed, please check network...） -->
+    <string name="error_sync_internal">同步失败，发生内部错误</string> <!-- 同步内部错误（对应英文：Sync failed, internal error occurs） -->
+    <string name="error_sync_cancelled">同步已取消</string>          <!-- 同步取消错误（对应英文：Sync is canceled） -->
+    <string name="sync_progress_login">登录%1$s...</string>          <!-- 同步登录进度（%1$s为账号名，对应英文：Logging into...） -->
+    <string name="sync_progress_init_list">正在获取服务器便签列表...</string> <!-- 同步获取远程列表进度（对应英文：Getting remote note list...） -->
+    <string name="sync_progress_syncing">正在同步本地便签...</string> <!-- 同步本地与Google Task进度（中文简化：省略Google Task） -->
+    
+    <!-- Preferences：【中文-中国】设置页面相关字符串 -->
+    <string name="preferences_title">设置</string>                  <!-- 设置页面标题（对应英文：Settings） -->
+    <string name="preferences_account_title">同步账号</string>       <!-- 同步账号设置项标题（对应英文：Sync account） -->
+    <string name="preferences_account_summary">与google task同步便签记录</string> <!-- 同步账号设置项描述（对应英文：Sync notes with google task） -->
+    <string name="preferences_last_sync_time">上次同步于 %1$s</string> <!-- 最后同步时间（%1$s为时间，对应英文：Last sync time...） -->
+    <string name="preferences_add_account">添加账号</string>        <!-- 添加同步账号文案（对应英文：Add account） -->
+    <string name="preferences_menu_change_account">更换账号</string> <!-- 切换同步账号菜单文本（对应英文：Change sync account） -->
+    <string name="preferences_menu_remove_account">删除账号</string> <!-- 移除同步账号菜单文本（对应英文：Remove sync account） -->
+    <string name="preferences_menu_cancel">取消</string>             <!-- 设置页面取消按钮（对应英文：Cancel） -->
+    <string name="preferences_button_sync_immediately">立即同步</string> <!-- 立即同步按钮文本（对应英文：Sync immediately） -->
+    <string name="preferences_button_sync_cancel">取消同步</string>  <!-- 取消同步按钮文本（对应英文：Cancel syncing） -->
+    <string name="preferences_dialog_change_account_title">当前帐号 %1$s</string> <!-- 切换账号弹窗标题（%1$s为当前账号，对应英文：Current account...） -->
+    <string name="preferences_dialog_change_account_warn_msg">如更换同步帐号，过去的帐号同步信息将被清空，再次切换的同时可能会造成数据重复</string> <!-- 切换账号警告文案（对应英文：All sync related information will be deleted...） -->
+    <string name="preferences_dialog_select_account_title">同步便签</string> <!-- 选择同步账号弹窗标题（对应英文：Sync notes） -->
+    <string name="preferences_dialog_select_account_tips">请选择google帐号，便签将与该帐号的google task内容同步。</string> <!-- 选择同步账号提示（对应英文：Please select a google account...） -->
+    <string name="preferences_toast_cannot_change_account">正在同步中，不能修改同步帐号</string> <!-- 同步中无法切换账号提示（对应英文：Cannot change the account because sync is in progress） -->
+    <string name="preferences_toast_success_set_accout">同步帐号已设置为%1$s</string> <!-- 设置同步账号成功提示（%1$s为账号名，对应英文：%1$s has been set as the sync account） -->
+    <string name="preferences_bg_random_appear_title">新建便签背景颜色随机</string> <!-- 新建便签背景色随机设置项（对应英文：New note background color random） -->
+
+    <!-- 【中文-中国】通用按钮/文件夹相关字符串 -->
+    <string name="button_delete">删除</string>                      <!-- 删除按钮文本（对应英文：Delete） -->
+    <string name="call_record_folder_name">通话便签</string>        <!-- 通话便签文件夹名称（对应英文：Call notes） -->
+    <string name="hint_foler_name">请输入名称</string>              <!-- 文件夹名称输入提示（注：foler为folder拼写瑕疵，对应英文：Input name） -->
+
+    <!-- 【中文-中国】搜索相关字符串 -->
+    <string name="search_label">正在搜索便签</string>               <!-- 搜索标签文本（对应英文：Searching Notes） -->
+    <string name="search_hint">搜索便签</string>                   <!-- 搜索输入框提示（对应英文：Search notes） -->
+    <string name="search_setting_description">便签中的文字</string>  <!-- 搜索设置描述（对应英文：Text in your notes） -->
+    <string name="search">便签</string>                            <!-- 搜索结果标题（对应英文：Notes） -->
+    <string name="datetime_dialog_ok">设置</string>                 <!-- 日期时间弹窗确认按钮（对应英文：set） -->
+    <string name="datetime_dialog_cancel">取消</string>            <!-- 日期时间弹窗取消按钮（对应英文：cancel） -->
+    
+    <!-- 【中文-中国】搜索结果数量复数文本：中文无单复数区分，仅配置other -->
+    <plurals name="search_results_title">
+        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 条符合“<xliff:g id="SEARCH">%2$s</xliff:g>”的搜索结果</item> <!-- 所有数量场景通用（对应英文：one/other） -->
+    </plurals>
+
+</resources>
