@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
  *
@@ -28,7 +27,9 @@ import net.micode.notes.R;
 import net.micode.notes.ui.NotesListActivity;
 import net.micode.notes.ui.NotesPreferenceActivity;
 
-
+/**
+ * 异步执行 GTask 同步，并在通知栏显示进度。
+ */
 public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
 
     private static int GTASK_SYNC_NOTIFICATION_ID = 5234235;
@@ -38,11 +39,8 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
     }
 
     private Context mContext;
-
     private NotificationManager mNotifiManager;
-
     private GTaskManager mTaskManager;
-
     private OnCompleteListener mOnCompleteListener;
 
     public GTaskASyncTask(Context context, OnCompleteListener listener) {
@@ -58,9 +56,7 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
     }
 
     public void publishProgess(String message) {
-        publishProgress(new String[] {
-            message
-        });
+        publishProgress(new String[] { message });
     }
 
     private void showNotification(int tickerId, String content) {
@@ -72,7 +68,6 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
         if (tickerId != R.string.ticker_success) {
             pendingIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext,
                     NotesPreferenceActivity.class), 0);
-
         } else {
             pendingIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext,
                     NotesListActivity.class), 0);
@@ -113,7 +108,6 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
         }
         if (mOnCompleteListener != null) {
             new Thread(new Runnable() {
-
                 public void run() {
                     mOnCompleteListener.onComplete();
                 }
