@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+<!--  Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,123 +13,241 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Notes</string>
-    <string name="app_widget2x2">Notes 2x2</string>
-    <string name="app_widget4x4">Notes 4x4</string>
-    <string name="widget_havenot_content">No associated note found, click to create associated note.</string>
-    <string name="widget_under_visit_mode">Privacy mode，can not see note content</string>
-    <string name="notelist_string_info">...</string>
-    <string name="notelist_menu_new">Add note</string>
-    <string name="delete_remind_time_message">Delete reminder successfully</string>
-    <string name="set_remind_time_message">Set reminder</string>
-    <string name="note_alert_expired">Expired</string>
-    <string name="format_date_ymd">yyyyMMdd</string>
-    <string name="format_datetime_mdhm">MMMd kk:mm</string>
-    <string name="notealert_ok">Got it</string>
-    <string name="notealert_enter">Take a look</string>
-    <string name="note_link_tel">Call</string>
-    <string name="note_link_email">Send email</string>
-    <string name="note_link_web">Browse web</string>
-    <string name="note_link_other">Open map</string>
-    <!-- Text export file information -->
-    <string name="file_path">/MIUI/notes/</string>
-    <string name="file_name_txt_format">notes_%s.txt</string>
-    <!-- notes list string -->
-    <string name="format_folder_files_count">(%d)</string>
-    <string name="menu_create_folder">New Folder</string>
-    <string name="menu_export_text">Export text</string>
-    <string name="menu_sync">Sync</string>
-    <string name="menu_sync_cancel">Cancel syncing</string>
-    <string name="menu_setting">Settings</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_delete">Delete</string>
-    <string name="menu_move">Move to folder</string>
-    <string name="menu_select_title">%d selected</string>
-    <string name="menu_select_none">Nothing selected, the operation is invalid</string>
-    <string name="menu_select_all">Select all</string>
-    <string name="menu_deselect_all">Deselect all</string>
-    <string name="menu_font_size">Font size</string>
-    <string name="menu_font_small">Small</string>
-    <string name="menu_font_normal">Medium</string>
-    <string name="menu_font_large">Large</string>
-    <string name="menu_font_super">Super</string>
-    <string name="menu_list_mode">Enter check list</string>
-    <string name="menu_normal_mode">Leave check list</string>
-    <string name="menu_folder_view">View folder</string>
-    <string name="menu_folder_delete">Delete folder</string>
-    <string name="menu_folder_change_name">Change folder name</string>
-    <string name="folder_exist">The folder %1$s exist, please rename</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send_to_desktop">Send to home</string>
-    <string name="menu_alert">Remind me</string>
-    <string name="menu_remove_remind">Delete reminder</string>
-    <string name="menu_title_select_folder">Select folder</string>
-    <string name="menu_move_parent_folder">Parent folder</string>
-    <string name="info_note_enter_desktop">Note added to home</string>
-    <string name="alert_message_delete_folder">Confirm to delete folder and its notes?</string>
-    <string name="alert_title_delete">Delete selected notes</string>
-    <string name="alert_message_delete_notes">Confirm to delete the selected %d notes?</string>
-    <string name="alert_message_delete_note">Confirm to delete this note?</string>
-    <string name="format_move_notes_to_folder">Have moved selected %1$d notes to %2$s folder</string>
-    <!-- Error information -->
-    <string name="error_sdcard_unmounted">SD card busy, not available now</string>
-    <string name="error_sdcard_export">Export failed, please check SD card</string>
-    <string name="error_note_not_exist">The note is not exist</string>
-    <string name="error_note_empty_for_clock">Sorry, can not set clock on empty note</string>
-    <string name="error_note_empty_for_send_to_desktop">Sorry, can not send and empty note to home</string>
-    <string name="success_sdcard_export">Export successful</string>
-    <string name="failed_sdcard_export">Export fail</string>
-    <string name="format_exported_file_location">Export text file (%1$s) to SD (%2$s) directory</string>
-    <!-- Sync -->
-    <string name="ticker_syncing">Syncing notes...</string>
-    <string name="ticker_success">Sync is successful</string>
-    <string name="ticker_fail">Sync is failed</string>
-    <string name="ticker_cancel">Sync is canceled</string>
-    <string name="success_sync_account">Sync is successful with account %1$s</string>
-    <string name="error_sync_network">Sync failed, please check network and account settings</string>
-    <string name="error_sync_internal">Sync failed, internal error occurs</string>
-    <string name="error_sync_cancelled">Sync is canceled</string>
-    <string name="sync_progress_login">Logging into %1$s...</string>
-    <string name="sync_progress_init_list">Getting remote note list...</string>
-    <string name="sync_progress_syncing">Synchronize local notes with Google Task...</string>
-    <!-- Preferences -->
-    <string name="preferences_title">Settings</string>
-    <string name="preferences_account_title">Sync account</string>
-    <string name="preferences_account_summary">Sync notes with google task</string>
-    <string name="preferences_last_sync_time">Last sync time %1$s</string>
-    <string name="preferences_last_sync_time_format">yyyy-MM-dd hh:mm:ss</string>
-    <string name="preferences_add_account">Add account</string>
-    <string name="preferences_menu_change_account">Change sync account</string>
-    <string name="preferences_menu_remove_account">Remove sync account</string>
-    <string name="preferences_menu_cancel">Cancel</string>
-    <string name="preferences_button_sync_immediately">Sync immediately</string>
-    <string name="preferences_button_sync_cancel">Cancel syncing</string>
-    <string name="preferences_dialog_change_account_title">Current account %1$s</string>
-    <string name="preferences_dialog_change_account_warn_msg">All sync related information will be deleted, which may result in duplicated items sometime</string>
-    <string name="preferences_dialog_select_account_title">Sync notes</string>
-    <string name="preferences_dialog_select_account_tips">Please select a google account. Local notes will be synced with google task.</string>
-    <string name="preferences_toast_cannot_change_account">Cannot change the account because sync is in progress</string>
-    <string name="preferences_toast_success_set_accout">%1$s has been set as the sync account</string>
-    <string name="preferences_bg_random_appear_title">New note background color random</string>
-
-    <string name="button_delete">Delete</string>
-    <string name="call_record_folder_name">Call notes</string>
-    <string name="hint_foler_name">Input name</string>
-
-    <string name="search_label">Searching Notes</string>
-    <string name="search_hint">Search notes</string>
-    <string name="search_setting_description">Text in your notes</string>
-    <string name="search">Notes</string>
-    <string name="datetime_dialog_ok">set</string>
-    <string name="datetime_dialog_cancel">cancel</string>
-    <plurals name="search_results_title">
-         <item quantity="one"><xliff:g id="number" example="1">%1$s</xliff:g> result for \"<xliff:g id="search" example="???">%2$s</xliff:g>\"</item>
-        <!-- Case of 0 or 2 or more results. -->
-        <item quantity="other"><xliff:g id="number" example="15">%1$s</xliff:g> results for \"<xliff:g id="search" example="???">%2$s</xliff:g>\"</item>
-    </plurals>
-
+ -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<!--  应用基础信息字符串  -->
+<string name="app_name">Notes</string>
+<!--  应用名称  -->
+<string name="app_widget2x2">Notes 2x2</string>
+<!--  2x2尺寸桌面小部件名称  -->
+<string name="app_widget4x4">Notes 4x4</string>
+<!--  4x4尺寸桌面小部件名称  -->
+<string name="widget_havenot_content">No associated note found, click to create associated note.</string>
+<!--  小部件无关联便签提示  -->
+<string name="widget_under_visit_mode">Privacy mode，can not see note content</string>
+<!--  小部件隐私模式提示  -->
+<string name="notelist_string_info">...</string>
+<!--  便签列表占位信息  -->
+<string name="notelist_menu_new">Add note</string>
+<!--  新建便签菜单文本  -->
+<!--  提醒相关字符串  -->
+<string name="delete_remind_time_message">Delete reminder successfully</string>
+<!--  删除提醒成功提示  -->
+<string name="set_remind_time_message">Set reminder</string>
+<!--  设置提醒文案  -->
+<string name="note_alert_expired">Expired</string>
+<!--  提醒过期标识  -->
+<!--  日期时间格式字符串  -->
+<string name="format_date_ymd">yyyyMMdd</string>
+<!--  年月日格式（无分隔符）  -->
+<string name="format_datetime_mdhm">MMMd kk:mm</string>
+<!--  月日+时分格式  -->
+<!--  提醒弹窗相关字符串  -->
+<string name="notealert_ok">Got it</string>
+<!--  提醒弹窗确认按钮  -->
+<string name="notealert_enter">Take a look</string>
+<!--  提醒弹窗查看按钮  -->
+<!--  便签链接跳转字符串  -->
+<string name="note_link_tel">Call</string>
+<!--  电话链接跳转文案  -->
+<string name="note_link_email">Send email</string>
+<!--  邮件链接跳转文案  -->
+<string name="note_link_web">Browse web</string>
+<!--  网页链接跳转文案  -->
+<string name="note_link_other">Open map</string>
+<!--  地图链接跳转文案  -->
+<!--  Text export file information  -->
+<string name="file_path">/MIUI/notes/</string>
+<!--  便签导出文件存储路径  -->
+<string name="file_name_txt_format">notes_%s.txt</string>
+<!--  导出文本文件名格式（%s为日期/标识）  -->
+<!--  notes list string：便签列表相关字符串  -->
+<string name="format_folder_files_count">(%d)</string>
+<!--  文件夹内便签数量格式（%d为数量）  -->
+<string name="menu_create_folder">New Folder</string>
+<!--  新建文件夹菜单文本  -->
+<string name="menu_export_text">Export text</string>
+<!--  导出文本菜单文本  -->
+<string name="menu_sync">Sync</string>
+<!--  同步菜单文本  -->
+<string name="menu_sync_cancel">Cancel syncing</string>
+<!--  取消同步菜单文本  -->
+<string name="menu_setting">Settings</string>
+<!--  设置菜单文本  -->
+<string name="menu_search">Search</string>
+<!--  搜索菜单文本  -->
+<string name="menu_delete">Delete</string>
+<!--  删除菜单文本  -->
+<string name="menu_move">Move to folder</string>
+<!--  移动到文件夹菜单文本  -->
+<string name="menu_select_title">%d selected</string>
+<!--  选中数量标题（%d为选中数）  -->
+<string name="menu_select_none">Nothing selected, the operation is invalid</string>
+<!--  未选中内容操作无效提示  -->
+<string name="menu_select_all">Select all</string>
+<!--  全选菜单文本  -->
+<string name="menu_deselect_all">Deselect all</string>
+<!--  取消全选菜单文本  -->
+<string name="menu_font_size">Font size</string>
+<!--  字体大小菜单文本  -->
+<string name="menu_font_small">Small</string>
+<!--  小字体选项  -->
+<string name="menu_font_normal">Medium</string>
+<!--  中字体选项  -->
+<string name="menu_font_large">Large</string>
+<!--  大字体选项  -->
+<string name="menu_font_super">Super</string>
+<!--  超大字体选项  -->
+<string name="menu_list_mode">Enter check list</string>
+<!--  进入清单模式菜单文本  -->
+<string name="menu_normal_mode">Leave check list</string>
+<!--  退出清单模式菜单文本  -->
+<string name="menu_folder_view">View folder</string>
+<!--  查看文件夹菜单文本  -->
+<string name="menu_folder_delete">Delete folder</string>
+<!--  删除文件夹菜单文本  -->
+<string name="menu_folder_change_name">Change folder name</string>
+<!--  重命名文件夹菜单文本  -->
+<string name="folder_exist">The folder %1$s exist, please rename</string>
+<!--  文件夹已存在提示（%1$s为文件夹名）  -->
+<string name="menu_share">Share</string>
+<!--  分享菜单文本  -->
+<string name="menu_send_to_desktop">Send to home</string>
+<!--  发送到桌面菜单文本  -->
+<string name="menu_alert">Remind me</string>
+<!--  设置提醒菜单文本  -->
+<string name="menu_remove_remind">Delete reminder</string>
+<!--  删除提醒菜单文本  -->
+<string name="menu_title_select_folder">Select folder</string>
+<!--  选择文件夹标题  -->
+<string name="menu_move_parent_folder">Parent folder</string>
+<!--  上级文件夹选项  -->
+<string name="info_note_enter_desktop">Note added to home</string>
+<!--  便签添加到桌面成功提示  -->
+<string name="alert_message_delete_folder">Confirm to delete folder and its notes?</string>
+<!--  删除文件夹确认弹窗文案  -->
+<string name="alert_title_delete">Delete selected notes</string>
+<!--  删除选中便签弹窗标题  -->
+<string name="alert_message_delete_notes">Confirm to delete the selected %d notes?</string>
+<!--  删除选中便签确认（%d为数量）  -->
+<string name="alert_message_delete_note">Confirm to delete this note?</string>
+<!--  删除单条便签确认  -->
+<string name="format_move_notes_to_folder">Have moved selected %1$d notes to %2$s folder</string>
+<!--  移动便签成功提示（%1$d数量/%2$s文件夹名）  -->
+<!--  Error information：错误提示字符串  -->
+<string name="error_sdcard_unmounted">SD card busy, not available now</string>
+<!--  SD卡未挂载错误  -->
+<string name="error_sdcard_export">Export failed, please check SD card</string>
+<!--  SD卡导出失败错误  -->
+<string name="error_note_not_exist">The note is not exist</string>
+<!--  便签不存在错误  -->
+<string name="error_note_empty_for_clock">Sorry, can not set clock on empty note</string>
+<!--  空便签无法设置提醒错误  -->
+<string name="error_note_empty_for_send_to_desktop">Sorry, can not send and empty note to home</string>
+<!--  空便签无法发送到桌面错误  -->
+<string name="success_sdcard_export">Export successful</string>
+<!--  导出成功提示  -->
+<string name="failed_sdcard_export">Export fail</string>
+<!--  导出失败提示  -->
+<string name="format_exported_file_location">Export text file (%1$s) to SD (%2$s) directory</string>
+<!--  导出文件路径提示（%1$s文件名/%2$s路径）  -->
+<!--  Sync：同步相关字符串  -->
+<string name="ticker_syncing">Syncing notes...</string>
+<!--  同步中通知文案  -->
+<string name="ticker_success">Sync is successful</string>
+<!--  同步成功通知文案  -->
+<string name="ticker_fail">Sync is failed</string>
+<!--  同步失败通知文案  -->
+<string name="ticker_cancel">Sync is canceled</string>
+<!--  同步取消通知文案  -->
+<string name="success_sync_account">Sync is successful with account %1$s</string>
+<!--  账号同步成功提示（%1$s为账号名）  -->
+<string name="error_sync_network">Sync failed, please check network and account settings</string>
+<!--  同步网络错误  -->
+<string name="error_sync_internal">Sync failed, internal error occurs</string>
+<!--  同步内部错误  -->
+<string name="error_sync_cancelled">Sync is canceled</string>
+<!--  同步取消错误  -->
+<string name="sync_progress_login">Logging into %1$s...</string>
+<!--  同步登录进度（%1$s为账号名）  -->
+<string name="sync_progress_init_list">Getting remote note list...</string>
+<!--  同步获取远程列表进度  -->
+<string name="sync_progress_syncing">Synchronize local notes with Google Task...</string>
+<!--  同步本地与Google Task进度  -->
+<!--  Preferences：设置页面相关字符串  -->
+<string name="preferences_title">Settings</string>
+<!--  设置页面标题  -->
+<string name="preferences_account_title">Sync account</string>
+<!--  同步账号设置项标题  -->
+<string name="preferences_account_summary">Sync notes with google task</string>
+<!--  同步账号设置项描述  -->
+<string name="preferences_last_sync_time">Last sync time %1$s</string>
+<!--  最后同步时间（%1$s为时间）  -->
+<string name="preferences_last_sync_time_format">yyyy-MM-dd hh:mm:ss</string>
+<!--  最后同步时间格式  -->
+<string name="preferences_add_account">Add account</string>
+<!--  添加同步账号文案  -->
+<string name="preferences_menu_change_account">Change sync account</string>
+<!--  切换同步账号菜单文本  -->
+<string name="preferences_menu_remove_account">Remove sync account</string>
+<!--  移除同步账号菜单文本  -->
+<string name="preferences_menu_cancel">Cancel</string>
+<!--  设置页面取消按钮  -->
+<string name="preferences_button_sync_immediately">Sync immediately</string>
+<!--  立即同步按钮文本  -->
+<string name="preferences_button_sync_cancel">Cancel syncing</string>
+<!--  取消同步按钮文本  -->
+<string name="preferences_dialog_change_account_title">Current account %1$s</string>
+<!--  切换账号弹窗标题（%1$s为当前账号）  -->
+<string name="preferences_dialog_change_account_warn_msg">All sync related information will be deleted, which may result in duplicated items sometime</string>
+<!--  切换账号警告文案  -->
+<string name="preferences_dialog_select_account_title">Sync notes</string>
+<!--  选择同步账号弹窗标题  -->
+<string name="preferences_dialog_select_account_tips">Please select a google account. Local notes will be synced with google task.</string>
+<!--  选择同步账号提示  -->
+<string name="preferences_toast_cannot_change_account">Cannot change the account because sync is in progress</string>
+<!--  同步中无法切换账号提示  -->
+<string name="preferences_toast_success_set_accout">%1$s has been set as the sync account</string>
+<!--  设置同步账号成功提示（%1$s为账号名）  -->
+<string name="preferences_bg_random_appear_title">New note background color random</string>
+<!--  新建便签背景色随机设置项  -->
+<!--  通用按钮/文件夹相关字符串  -->
+<string name="button_delete">Delete</string>
+<!--  删除按钮文本  -->
+<string name="call_record_folder_name">Call notes</string>
+<!--  通话便签文件夹名称  -->
+<string name="hint_foler_name">Input name</string>
+<!--  文件夹名称输入提示（注：foler为folder拼写瑕疵）  -->
+<!--  搜索相关字符串  -->
+<string name="search_label">Searching Notes</string>
+<!--  搜索标签文本  -->
+<string name="search_hint">Search notes</string>
+<!--  搜索输入框提示  -->
+<string name="search_setting_description">Text in your notes</string>
+<!--  搜索设置描述  -->
+<string name="search">Notes</string>
+<!--  搜索结果标题  -->
+<string name="datetime_dialog_ok">set</string>
+<!--  日期时间弹窗确认按钮  -->
+<string name="datetime_dialog_cancel">cancel</string>
+<!--  日期时间弹窗取消按钮  -->
+<!--  搜索结果数量复数文本：适配不同数量的结果文案  -->
+<plurals name="search_results_title">
+<item quantity="one">
+<xliff:g id="number" example="1">%1$s</xliff:g>
+result for \"
+<xliff:g id="search" example="???">%2$s</xliff:g>
+\"
+</item>
+<!--  1条搜索结果  -->
+<!--  Case of 0 or 2 or more results.  -->
+<item quantity="other">
+<xliff:g id="number" example="15">%1$s</xliff:g>
+results for \"
+<xliff:g id="search" example="???">%2$s</xliff:g>
+\"
+</item>
+<!--  0/2+条搜索结果  -->
+</plurals>
+</resources>
 </resources>
