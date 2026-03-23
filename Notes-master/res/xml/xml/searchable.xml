@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- 便签应用搜索功能配置：Android搜索框架核心配置文件 -->
+<!-- 配置项说明：
+     - android:label：搜索界面标签（引用search_label字符串）
+     - android:hint：搜索输入框提示语（引用search_hint字符串）
+     - android:searchMode：搜索模式（基于输入文本重写查询）
+     - android:searchSuggestAuthority：搜索建议权威者（ContentProvider标识为notes）
+     - android:searchSuggestIntentAction：搜索建议点击动作（跳转到VIEW意图查看便签）
+     - android:searchSettingsDescription：搜索设置描述（引用search_setting_description字符串）
+     - android:includeInGlobalSearch：允许系统全局搜索调用便签搜索
+-->
+<searchable
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:label="@string/search_label"
+    android:hint="@string/search_hint"
+    android:searchMode="queryRewriteFromText"
+    android:searchSuggestAuthority="notes"
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSettingsDescription="@string/search_setting_description"
+    android:includeInGlobalSearch="true" />
