@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 
+<!-- 便签列表下拉菜单导航栏：水平线性布局，仅包含一个选择菜单按钮 -->
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/navigation_bar"
@@ -22,6 +23,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+    <!-- 选择菜单按钮：单行显示，左垂直居中，无边框样式，引用系统对话框分割线属性 -->
     <Button android:id="@+id/selection_menu"
             android:divider="?android:attr/listDividerAlertDialog"
             android:singleLine="true"
