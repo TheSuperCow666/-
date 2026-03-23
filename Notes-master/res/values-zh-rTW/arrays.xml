@@ -16,8 +16,9 @@
 -->
 
 <resources>
+    <!-- 【中文-中国台湾】便签分享方式字符串数组：适配繁体中文（台湾）环境的分享渠道 -->
     <string-array name="menu_share_ways">
-        <item>短信</item>
-        <item>郵件</item>
+        <item>短信</item> <!-- 短信分享（对应英文：Messaging | 简体中文：短信） -->
+        <item>郵件</item> <!-- 邮件分享（对应英文：Email | 简体中文：邮件，「郵」为繁体标准写法） -->
     </string-array>
 </resources>
