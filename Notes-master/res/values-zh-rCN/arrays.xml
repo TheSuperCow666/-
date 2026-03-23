@@ -16,8 +16,9 @@
 -->
 
 <resources>
+    <!-- 【中文-中国】便签分享方式字符串数组：适配中文环境的分享渠道 -->
     <string-array name="menu_share_ways">
-        <item>短信</item>
-        <item>邮件</item>
+        <item>短信</item><!-- 短信分享（对应英文：Messaging） -->
+        <item>邮件</item><!-- 邮件分享（对应英文：Email） -->
     </string-array>
 </resources>
