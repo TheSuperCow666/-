@@ -15,14 +15,17 @@
      limitations under the License.
 -->
 
+<!-- 2x尺寸便签桌面小部件布局：FrameLayout根布局，固定宽高146dip，层叠显示背景图和文本 -->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="146dip"
     android:layout_height="146dip">
-    <ImageView
+    <!-- 小部件背景图：全屏宽高，作为文本的底层背景 -->
+    ImageView
         android:id="@+id/widget_bg_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
+    <!-- 小部件文本内容：全屏宽高，内边距上20dip/左右15dip，字号14sp，文字色#FF663300，最多6行，行间距1.2倍 -->
     <TextView
         android:id="@+id/widget_text"
         android:layout_width="fill_parent"
