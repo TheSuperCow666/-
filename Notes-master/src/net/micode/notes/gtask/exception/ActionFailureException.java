@@ -16,17 +16,33 @@
 
 package net.micode.notes.gtask.exception;
 
+/**
+ * 表示操作执行失败时抛出的运行时异常。
+ * 例如在数据提交、网络请求或同步过程中发生不可恢复的错误时使用。
+ */
 public class ActionFailureException extends RuntimeException {
     private static final long serialVersionUID = 4425249765923293627L;
 
+    /**
+     * 构造一个无详细消息的异常。
+     */
     public ActionFailureException() {
         super();
     }
 
+    /**
+     * 构造一个带有指定详细消息的异常。
+     * @param paramString 详细消息
+     */
     public ActionFailureException(String paramString) {
         super(paramString);
     }
 
+    /**
+     * 构造一个带有指定详细消息和原因的异常。
+     * @param paramString 详细消息
+     * @param paramThrowable 原因
+     */
     public ActionFailureException(String paramString, Throwable paramThrowable) {
         super(paramString, paramThrowable);
     }
