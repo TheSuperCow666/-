@@ -15,13 +15,21 @@
      limitations under the License.
 -->
 
+<!-- 便签应用设置页面布局：PreferenceScreen为设置页面根容器 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- 同步账号设置分类：空容器，用于代码动态填充Google同步账号相关选项 -->
     <PreferenceCategory
         android:key="pref_sync_account_key">
     </PreferenceCategory>
 
+    <!-- 外观设置分类：包含便签背景相关设置项 -->
     <PreferenceCategory>
+        <!-- 新建便签背景颜色随机开关：默认关闭 -->
+        <!-- 设置项唯一标识：pref_key_bg_random_appear（背景随机颜色） -->
+        <!-- 设置项标题：引用字符串preferences_bg_random_appear_title（新建便签背景颜色随机） -->
+        <!-- 默认值：false（关闭背景随机颜色功能） -->
         <CheckBoxPreference
             android:key="pref_key_bg_random_appear"
             android:title="@string/preferences_bg_random_appear_title"
