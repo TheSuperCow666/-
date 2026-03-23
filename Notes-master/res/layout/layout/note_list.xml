@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- 便签列表页面布局：FrameLayout根布局，包含标题栏、便签列表、底部新建便签按钮 -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/list_background">
+
+    <!-- 标题栏+列表容器：垂直线性布局 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <!-- 标题栏文本：默认隐藏，单行显示，垂直居中，背景为title_bar_bg，文字色#FFEAD1AE -->
+        <TextView
+            android:id="@+id/tv_title_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_bar_bg"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textColor="#FFEAD1AE"
+            android:textSize="@dimen/text_font_size_medium" />
+
+        <!-- 便签列表：占1份高度，取消缓存色/选择器/分割线/渐变边缘，优化列表显示效果 -->
+        <ListView
+            android:id="@+id/notes_list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:cacheColorHint="@null"
+            android:listSelector="@android:color/transparent"
+            android:divider="@null"
+            android:fadingEdge="@null" />
+    </LinearLayout>
+
+    <!-- 新建便签按钮：底部显示，全屏宽度，不可获取焦点，背景为new_note -->
+    <Button
+        android:id="@+id/btn_new_note"
+        android:background="@drawable/new_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:layout_gravity="bottom" />
+</FrameLayout>
