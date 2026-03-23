@@ -35,42 +35,41 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+/**
+ * 封装 data 表的一条记录，提供与 GTask 同步的数据转换和提交功能。
+ */
 public class SqlData {
     private static final String TAG = SqlData.class.getSimpleName();
 
     private static final int INVALID_ID = -99999;
 
+    /**
+     * 查询 data 表所需的投影列
+     */
     public static final String[] PROJECTION_DATA = new String[] {
             DataColumns.ID, DataColumns.MIME_TYPE, DataColumns.CONTENT, DataColumns.DATA1,
             DataColumns.DATA3
     };
 
+    // 列索引
     public static final int DATA_ID_COLUMN = 0;
-
     public static final int DATA_MIME_TYPE_COLUMN = 1;
-
     public static final int DATA_CONTENT_COLUMN = 2;
-
     public static final int DATA_CONTENT_DATA_1_COLUMN = 3;
-
     public static final int DATA_CONTENT_DATA_3_COLUMN = 4;
 
     private ContentResolver mContentResolver;
-
-    private boolean mIsCreate;
-
+    private boolean mIsCreate;           // 是否为新创建（尚未持久化）
     private long mDataId;
-
     private String mDataMimeType;
-
     private String mDataContent;
-
     private long mDataContentData1;
-
     private String mDataContentData3;
+    private ContentValues mDiffDataValues;  // 记录待提交的修改
 
-    private ContentValues mDiffDataValues;
-
+    /**
+     * 构造一个新的 SqlData 对象（新建）
+     */
     public SqlData(Context context) {
         mContentResolver = context.getContentResolver();
         mIsCreate = true;
@@ -82,6 +81,9 @@ public class SqlData {
         mDiffDataValues = new ContentValues();
     }
 
+    /**
+     * 从 Cursor 构造 SqlData 对象（已存在）
+     */
     public SqlData(Context context, Cursor c) {
         mContentResolver = context.getContentResolver();
         mIsCreate = false;
@@ -89,6 +91,9 @@ public class SqlData {
         mDiffDataValues = new ContentValues();
     }
 
+    /**
+     * 从游标加载数据到成员变量
+     */
     private void loadFromCursor(Cursor c) {
         mDataId = c.getLong(DATA_ID_COLUMN);
         mDataMimeType = c.getString(DATA_MIME_TYPE_COLUMN);
@@ -97,6 +102,10 @@ public class SqlData {
         mDataContentData3 = c.getString(DATA_CONTENT_DATA_3_COLUMN);
     }
 
+    /**
+     * 从远程 JSON 设置数据，并记录差异到 mDiffDataValues
+     * @param js 包含 data 信息的 JSON 对象
+     */
     public void setContent(JSONObject js) throws JSONException {
         long dataId = js.has(DataColumns.ID) ? js.getLong(DataColumns.ID) : INVALID_ID;
         if (mIsCreate || mDataId != dataId) {
@@ -130,6 +139,10 @@ public class SqlData {
         mDataContentData3 = dataContentData3;
     }
 
+    /**
+     * 将当前数据转换为 JSON 对象（用于上传同步）
+     * @return JSON 对象，如果对象尚未创建则返回 null
+     */
     public JSONObject getContent() throws JSONException {
         if (mIsCreate) {
             Log.e(TAG, "it seems that we haven't created this in database yet");
@@ -144,13 +157,18 @@ public class SqlData {
         return js;
     }
 
+    /**
+     * 提交数据到数据库
+     * @param noteId 所属便签 ID
+     * @param validateVersion 是否验证版本号（用于同步冲突检测）
+     * @param version 期望的版本号（当 validateVersion 为 true 时使用）
+     */
     public void commit(long noteId, boolean validateVersion, long version) {
-
         if (mIsCreate) {
+            // 新建：插入 data 记录
             if (mDataId == INVALID_ID && mDiffDataValues.containsKey(DataColumns.ID)) {
                 mDiffDataValues.remove(DataColumns.ID);
             }
-
             mDiffDataValues.put(DataColumns.NOTE_ID, noteId);
             Uri uri = mContentResolver.insert(Notes.CONTENT_DATA_URI, mDiffDataValues);
             try {
@@ -160,15 +178,17 @@ public class SqlData {
                 throw new ActionFailureException("create note failed");
             }
         } else {
+            // 更新：如果有变更，执行更新操作
             if (mDiffDataValues.size() > 0) {
                 int result = 0;
                 if (!validateVersion) {
                     result = mContentResolver.update(ContentUris.withAppendedId(
                             Notes.CONTENT_DATA_URI, mDataId), mDiffDataValues, null, null);
                 } else {
+                    // 修复：添加字段名 DataColumns.NOTE_ID，避免 SQL 语法错误
                     result = mContentResolver.update(ContentUris.withAppendedId(
                             Notes.CONTENT_DATA_URI, mDataId), mDiffDataValues,
-                            " ? in (SELECT " + NoteColumns.ID + " FROM " + TABLE.NOTE
+                            DataColumns.NOTE_ID + " in (SELECT " + NoteColumns.ID + " FROM " + TABLE.NOTE
                                     + " WHERE " + NoteColumns.VERSION + "=?)", new String[] {
                                     String.valueOf(noteId), String.valueOf(version)
                             });
