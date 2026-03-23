@@ -15,6 +15,12 @@
      limitations under the License.
 -->
 
+<!-- 便签4x4桌面小部件配置：AppWidget核心配置文件 -->
+<!-- 配置项说明：
+     - android:initialLayout：小部件初始布局（引用widget_4x布局文件）
+     - android:minWidth：小部件最小宽度（294dp，适配4x4网格尺寸）
+     - android:minHeight：小部件最小高度（294dp，适配4x4网格尺寸）
+-->
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/widget_4x"
