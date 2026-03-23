@@ -15,9 +15,11 @@
      limitations under the License.
 -->
 
+<!-- 子文件夹页面菜单：仅包含新建便签菜单项 -->
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 新建便签菜单项 -->
     <item
         android:id="@+id/menu_new_note"
         android:title="@string/notelist_menu_new"/>
