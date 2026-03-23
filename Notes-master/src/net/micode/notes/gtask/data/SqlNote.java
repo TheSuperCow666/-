@@ -38,11 +38,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
+/**
+ * 封装 note 表的一条记录及其关联的 data 记录，提供与 GTask 同步的数据转换和提交功能。
+ */
 public class SqlNote {
     private static final String TAG = SqlNote.class.getSimpleName();
 
     private static final int INVALID_ID = -99999;
 
+    /**
+     * 查询 note 表所需的完整投影列
+     */
     public static final String[] PROJECTION_NOTE = new String[] {
             NoteColumns.ID, NoteColumns.ALERTED_DATE, NoteColumns.BG_COLOR_ID,
             NoteColumns.CREATED_DATE, NoteColumns.HAS_ATTACHMENT, NoteColumns.MODIFIED_DATE,
@@ -52,76 +58,52 @@ public class SqlNote {
             NoteColumns.VERSION
     };
 
+    // 列索引
     public static final int ID_COLUMN = 0;
-
     public static final int ALERTED_DATE_COLUMN = 1;
-
     public static final int BG_COLOR_ID_COLUMN = 2;
-
     public static final int CREATED_DATE_COLUMN = 3;
-
     public static final int HAS_ATTACHMENT_COLUMN = 4;
-
     public static final int MODIFIED_DATE_COLUMN = 5;
-
     public static final int NOTES_COUNT_COLUMN = 6;
-
     public static final int PARENT_ID_COLUMN = 7;
-
     public static final int SNIPPET_COLUMN = 8;
-
     public static final int TYPE_COLUMN = 9;
-
     public static final int WIDGET_ID_COLUMN = 10;
-
     public static final int WIDGET_TYPE_COLUMN = 11;
-
     public static final int SYNC_ID_COLUMN = 12;
-
     public static final int LOCAL_MODIFIED_COLUMN = 13;
-
     public static final int ORIGIN_PARENT_ID_COLUMN = 14;
-
     public static final int GTASK_ID_COLUMN = 15;
-
     public static final int VERSION_COLUMN = 16;
 
     private Context mContext;
-
     private ContentResolver mContentResolver;
-
-    private boolean mIsCreate;
-
+    private boolean mIsCreate;           // 是否为新创建（尚未持久化）
     private long mId;
-
     private long mAlertDate;
-
     private int mBgColorId;
-
     private long mCreatedDate;
-
     private int mHasAttachment;
-
     private long mModifiedDate;
-
     private long mParentId;
-
     private String mSnippet;
-
     private int mType;
-
     private int mWidgetId;
-
     private int mWidgetType;
-
     private long mOriginParent;
-
     private long mVersion;
+    // 同步相关字段，确保内存中完整记录
+    private long mSyncId;
+    private int mLocalModified;
+    private String mGtaskId;
 
-    private ContentValues mDiffNoteValues;
+    private ContentValues mDiffNoteValues;   // 记录 note 表的待提交修改
+    private ArrayList<SqlData> mDataList;    // 关联的 data 记录列表
 
-    private ArrayList<SqlData> mDataList;
-
+    /**
+     * 构造一个新的 SqlNote 对象（新建）
+     */
     public SqlNote(Context context) {
         mContext = context;
         mContentResolver = context.getContentResolver();
@@ -139,10 +121,16 @@ public class SqlNote {
         mWidgetType = Notes.TYPE_WIDGET_INVALIDE;
         mOriginParent = 0;
         mVersion = 0;
+        mSyncId = 0;
+        mLocalModified = 0;
+        mGtaskId = "";
         mDiffNoteValues = new ContentValues();
         mDataList = new ArrayList<SqlData>();
     }
 
+    /**
+     * 从 Cursor 构造 SqlNote 对象（已存在）
+     */
     public SqlNote(Context context, Cursor c) {
         mContext = context;
         mContentResolver = context.getContentResolver();
@@ -154,6 +142,9 @@ public class SqlNote {
         mDiffNoteValues = new ContentValues();
     }
 
+    /**
+     * 根据 ID 构造 SqlNote 对象（已存在）
+     */
     public SqlNote(Context context, long id) {
         mContext = context;
         mContentResolver = context.getContentResolver();
@@ -163,16 +154,16 @@ public class SqlNote {
         if (mType == Notes.TYPE_NOTE)
             loadDataContent();
         mDiffNoteValues = new ContentValues();
-
     }
 
+    /**
+     * 根据 ID 从数据库加载数据
+     */
     private void loadFromCursor(long id) {
         Cursor c = null;
         try {
             c = mContentResolver.query(Notes.CONTENT_NOTE_URI, PROJECTION_NOTE, "(_id=?)",
-                    new String[] {
-                        String.valueOf(id)
-                    }, null);
+                    new String[] { String.valueOf(id) }, null);
             if (c != null) {
                 c.moveToNext();
                 loadFromCursor(c);
@@ -185,6 +176,9 @@ public class SqlNote {
         }
     }
 
+    /**
+     * 从游标加载数据到成员变量
+     */
     private void loadFromCursor(Cursor c) {
         mId = c.getLong(ID_COLUMN);
         mAlertDate = c.getLong(ALERTED_DATE_COLUMN);
@@ -198,16 +192,21 @@ public class SqlNote {
         mWidgetId = c.getInt(WIDGET_ID_COLUMN);
         mWidgetType = c.getInt(WIDGET_TYPE_COLUMN);
         mVersion = c.getLong(VERSION_COLUMN);
+        // 加载同步字段，确保对象状态完整
+        mSyncId = c.getLong(SYNC_ID_COLUMN);
+        mLocalModified = c.getInt(LOCAL_MODIFIED_COLUMN);
+        mGtaskId = c.getString(GTASK_ID_COLUMN);
     }
 
+    /**
+     * 加载该便签下所有 SqlData 对象
+     */
     private void loadDataContent() {
         Cursor c = null;
         mDataList.clear();
         try {
             c = mContentResolver.query(Notes.CONTENT_DATA_URI, SqlData.PROJECTION_DATA,
-                    "(note_id=?)", new String[] {
-                        String.valueOf(mId)
-                    }, null);
+                    "(note_id=?)", new String[] { String.valueOf(mId) }, null);
             if (c != null) {
                 if (c.getCount() == 0) {
                     Log.w(TAG, "it seems that the note has not data");
@@ -226,85 +225,84 @@ public class SqlNote {
         }
     }
 
+    /**
+     * 从远程 JSON 设置便签内容（包括 note 和 data）
+     * @param js 包含 note 和 data 信息的 JSON 对象
+     * @return 成功返回 true，否则返回 false
+     */
     public boolean setContent(JSONObject js) {
         try {
             JSONObject note = js.getJSONObject(GTaskStringUtils.META_HEAD_NOTE);
             if (note.getInt(NoteColumns.TYPE) == Notes.TYPE_SYSTEM) {
                 Log.w(TAG, "cannot set system folder");
             } else if (note.getInt(NoteColumns.TYPE) == Notes.TYPE_FOLDER) {
-                // for folder we can only update the snnipet and type
-                String snippet = note.has(NoteColumns.SNIPPET) ? note
-                        .getString(NoteColumns.SNIPPET) : "";
+                // 文件夹：只更新 snippet 和 type
+                String snippet = note.has(NoteColumns.SNIPPET) ? note.getString(NoteColumns.SNIPPET) : "";
                 if (mIsCreate || !mSnippet.equals(snippet)) {
                     mDiffNoteValues.put(NoteColumns.SNIPPET, snippet);
                 }
                 mSnippet = snippet;
 
-                int type = note.has(NoteColumns.TYPE) ? note.getInt(NoteColumns.TYPE)
-                        : Notes.TYPE_NOTE;
+                int type = note.has(NoteColumns.TYPE) ? note.getInt(NoteColumns.TYPE) : Notes.TYPE_NOTE;
                 if (mIsCreate || mType != type) {
                     mDiffNoteValues.put(NoteColumns.TYPE, type);
                 }
                 mType = type;
             } else if (note.getInt(NoteColumns.TYPE) == Notes.TYPE_NOTE) {
                 JSONArray dataArray = js.getJSONArray(GTaskStringUtils.META_HEAD_DATA);
+                // 解析 note 字段
                 long id = note.has(NoteColumns.ID) ? note.getLong(NoteColumns.ID) : INVALID_ID;
                 if (mIsCreate || mId != id) {
                     mDiffNoteValues.put(NoteColumns.ID, id);
                 }
                 mId = id;
 
-                long alertDate = note.has(NoteColumns.ALERTED_DATE) ? note
-                        .getLong(NoteColumns.ALERTED_DATE) : 0;
+                long alertDate = note.has(NoteColumns.ALERTED_DATE) ? note.getLong(NoteColumns.ALERTED_DATE) : 0;
                 if (mIsCreate || mAlertDate != alertDate) {
                     mDiffNoteValues.put(NoteColumns.ALERTED_DATE, alertDate);
                 }
                 mAlertDate = alertDate;
 
-                int bgColorId = note.has(NoteColumns.BG_COLOR_ID) ? note
-                        .getInt(NoteColumns.BG_COLOR_ID) : ResourceParser.getDefaultBgId(mContext);
+                int bgColorId = note.has(NoteColumns.BG_COLOR_ID) ? note.getInt(NoteColumns.BG_COLOR_ID)
+                        : ResourceParser.getDefaultBgId(mContext);
                 if (mIsCreate || mBgColorId != bgColorId) {
                     mDiffNoteValues.put(NoteColumns.BG_COLOR_ID, bgColorId);
                 }
                 mBgColorId = bgColorId;
 
-                long createDate = note.has(NoteColumns.CREATED_DATE) ? note
-                        .getLong(NoteColumns.CREATED_DATE) : System.currentTimeMillis();
+                long createDate = note.has(NoteColumns.CREATED_DATE) ? note.getLong(NoteColumns.CREATED_DATE)
+                        : System.currentTimeMillis();
                 if (mIsCreate || mCreatedDate != createDate) {
                     mDiffNoteValues.put(NoteColumns.CREATED_DATE, createDate);
                 }
                 mCreatedDate = createDate;
 
-                int hasAttachment = note.has(NoteColumns.HAS_ATTACHMENT) ? note
-                        .getInt(NoteColumns.HAS_ATTACHMENT) : 0;
+                int hasAttachment = note.has(NoteColumns.HAS_ATTACHMENT) ? note.getInt(NoteColumns.HAS_ATTACHMENT) : 0;
                 if (mIsCreate || mHasAttachment != hasAttachment) {
                     mDiffNoteValues.put(NoteColumns.HAS_ATTACHMENT, hasAttachment);
                 }
                 mHasAttachment = hasAttachment;
 
-                long modifiedDate = note.has(NoteColumns.MODIFIED_DATE) ? note
-                        .getLong(NoteColumns.MODIFIED_DATE) : System.currentTimeMillis();
+                long modifiedDate = note.has(NoteColumns.MODIFIED_DATE) ? note.getLong(NoteColumns.MODIFIED_DATE)
+                        : System.currentTimeMillis();
                 if (mIsCreate || mModifiedDate != modifiedDate) {
                     mDiffNoteValues.put(NoteColumns.MODIFIED_DATE, modifiedDate);
                 }
                 mModifiedDate = modifiedDate;
 
-                long parentId = note.has(NoteColumns.PARENT_ID) ? note
-                        .getLong(NoteColumns.PARENT_ID) : 0;
+                long parentId = note.has(NoteColumns.PARENT_ID) ? note.getLong(NoteColumns.PARENT_ID) : 0;
                 if (mIsCreate || mParentId != parentId) {
                     mDiffNoteValues.put(NoteColumns.PARENT_ID, parentId);
                 }
                 mParentId = parentId;
 
-                String snippet = note.has(NoteColumns.SNIPPET) ? note
-                        .getString(NoteColumns.SNIPPET) : "";
+                String snippet = note.has(NoteColumns.SNIPPET) ? note.getString(NoteColumns.SNIPPET) : "";
                 if (mIsCreate || !mSnippet.equals(snippet)) {
                     mDiffNoteValues.put(NoteColumns.SNIPPET, snippet);
                 }
                 mSnippet = snippet;
 
-                int type = note.has(NoteColumns.TYPE) ? note.getInt(NoteColumns.TYPE)
-                        : Notes.TYPE_NOTE;
+                int type = note.has(NoteColumns.TYPE) ? note.getInt(NoteColumns.TYPE) : Notes.TYPE_NOTE;
                 if (mIsCreate || mType != type) {
                     mDiffNoteValues.put(NoteColumns.TYPE, type);
                 }
@@ -317,20 +315,20 @@ public class SqlNote {
                 }
                 mWidgetId = widgetId;
 
-                int widgetType = note.has(NoteColumns.WIDGET_TYPE) ? note
-                        .getInt(NoteColumns.WIDGET_TYPE) : Notes.TYPE_WIDGET_INVALIDE;
+                int widgetType = note.has(NoteColumns.WIDGET_TYPE) ? note.getInt(NoteColumns.WIDGET_TYPE)
+                        : Notes.TYPE_WIDGET_INVALIDE;
                 if (mIsCreate || mWidgetType != widgetType) {
                     mDiffNoteValues.put(NoteColumns.WIDGET_TYPE, widgetType);
                 }
                 mWidgetType = widgetType;
 
-                long originParent = note.has(NoteColumns.ORIGIN_PARENT_ID) ? note
-                        .getLong(NoteColumns.ORIGIN_PARENT_ID) : 0;
+                long originParent = note.has(NoteColumns.ORIGIN_PARENT_ID) ? note.getLong(NoteColumns.ORIGIN_PARENT_ID) : 0;
                 if (mIsCreate || mOriginParent != originParent) {
                     mDiffNoteValues.put(NoteColumns.ORIGIN_PARENT_ID, originParent);
                 }
                 mOriginParent = originParent;
 
+                // 处理 data 数组
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject data = dataArray.getJSONObject(i);
                     SqlData sqlData = null;
@@ -342,12 +340,10 @@ public class SqlNote {
                             }
                         }
                     }
-
                     if (sqlData == null) {
                         sqlData = new SqlData(mContext);
                         mDataList.add(sqlData);
                     }
-
                     sqlData.setContent(data);
                 }
             }
@@ -359,10 +355,13 @@ public class SqlNote {
         return true;
     }
 
+    /**
+     * 将当前便签内容转换为 JSON 对象（用于上传同步）
+     * @return JSON 对象，符合 GTask 同步格式，如果对象尚未创建则返回 null
+     */
     public JSONObject getContent() {
         try {
             JSONObject js = new JSONObject();
-
             if (mIsCreate) {
                 Log.e(TAG, "it seems that we haven't created this in database yet");
                 return null;
@@ -398,7 +397,6 @@ public class SqlNote {
                 note.put(NoteColumns.SNIPPET, mSnippet);
                 js.put(GTaskStringUtils.META_HEAD_NOTE, note);
             }
-
             return js;
         } catch (JSONException e) {
             Log.e(TAG, e.toString());
@@ -407,6 +405,7 @@ public class SqlNote {
         return null;
     }
 
+    // ----- 同步时使用的 setter 方法 -----
     public void setParentId(long id) {
         mParentId = id;
         mDiffNoteValues.put(NoteColumns.PARENT_ID, id);
@@ -424,6 +423,7 @@ public class SqlNote {
         mDiffNoteValues.put(NoteColumns.LOCAL_MODIFIED, 0);
     }
 
+    // ----- 公共 getter 方法 -----
     public long getId() {
         return mId;
     }
@@ -440,12 +440,16 @@ public class SqlNote {
         return mType == Notes.TYPE_NOTE;
     }
 
+    /**
+     * 提交便签变更到数据库
+     * @param validateVersion 是否验证版本号（用于同步冲突检测）
+     */
     public void commit(boolean validateVersion) {
         if (mIsCreate) {
+            // 新建：先插入 note，再插入 data
             if (mId == INVALID_ID && mDiffNoteValues.containsKey(NoteColumns.ID)) {
                 mDiffNoteValues.remove(NoteColumns.ID);
             }
-
             Uri uri = mContentResolver.insert(Notes.CONTENT_NOTE_URI, mDiffNoteValues);
             try {
                 mId = Long.valueOf(uri.getPathSegments().get(1));
@@ -456,37 +460,33 @@ public class SqlNote {
             if (mId == 0) {
                 throw new IllegalStateException("Create thread id failed");
             }
-
             if (mType == Notes.TYPE_NOTE) {
                 for (SqlData sqlData : mDataList) {
                     sqlData.commit(mId, false, -1);
                 }
             }
         } else {
+            // 更新：先更新 note 表，再更新 data 表
             if (mId <= 0 && mId != Notes.ID_ROOT_FOLDER && mId != Notes.ID_CALL_RECORD_FOLDER) {
                 Log.e(TAG, "No such note");
                 throw new IllegalStateException("Try to update note with invalid id");
             }
             if (mDiffNoteValues.size() > 0) {
-                mVersion ++;
+                mVersion++;
                 int result = 0;
                 if (!validateVersion) {
                     result = mContentResolver.update(Notes.CONTENT_NOTE_URI, mDiffNoteValues, "("
-                            + NoteColumns.ID + "=?)", new String[] {
-                        String.valueOf(mId)
-                    });
+                            + NoteColumns.ID + "=?)", new String[] { String.valueOf(mId) });
                 } else {
+                    // 注意：版本检查使用 <= 而非 ==，可能导致旧版本覆盖新版本，属于同步冲突处理的潜在问题
                     result = mContentResolver.update(Notes.CONTENT_NOTE_URI, mDiffNoteValues, "("
                             + NoteColumns.ID + "=?) AND (" + NoteColumns.VERSION + "<=?)",
-                            new String[] {
-                                    String.valueOf(mId), String.valueOf(mVersion)
-                            });
+                            new String[] { String.valueOf(mId), String.valueOf(mVersion) });
                 }
                 if (result == 0) {
                     Log.w(TAG, "there is no update. maybe user updates note when syncing");
                 }
             }
-
             if (mType == Notes.TYPE_NOTE) {
                 for (SqlData sqlData : mDataList) {
                     sqlData.commit(mId, validateVersion, mVersion);
@@ -494,7 +494,7 @@ public class SqlNote {
             }
         }
 
-        // refresh local info
+        // 刷新本地数据
         loadFromCursor(mId);
         if (mType == Notes.TYPE_NOTE)
             loadDataContent();
