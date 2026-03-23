@@ -15,12 +15,14 @@
      limitations under the License.
 -->
 
+<!-- 设置页面头部布局：垂直线性布局，包含同步按钮和同步状态文本 -->
 <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 立即同步按钮：全屏宽度，上下左右边距分别为15dip/30dip/0/30dip，使用系统中等文本样式 -->
     <Button
         android:id="@+id/preference_sync_button"
         android:layout_width="fill_parent"
@@ -31,6 +33,7 @@
         style="?android:attr/textAppearanceMedium"
         android:text="@string/preferences_button_sync_immediately"/>
 
+    <!-- 同步状态文本：居中显示，默认隐藏 -->
     <TextView
         android:id="@+id/prefenerece_sync_status_textview"
         android:layout_width="wrap_content"
