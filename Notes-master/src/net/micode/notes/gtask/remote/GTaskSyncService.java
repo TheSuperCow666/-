@@ -23,23 +23,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
+/**
+ * GTask 同步服务，负责在后台执行同步任务，并通过广播通知进度。
+ */
 public class GTaskSyncService extends Service {
     public final static String ACTION_STRING_NAME = "sync_action_type";
 
     public final static int ACTION_START_SYNC = 0;
-
     public final static int ACTION_CANCEL_SYNC = 1;
-
     public final static int ACTION_INVALID = 2;
 
     public final static String GTASK_SERVICE_BROADCAST_NAME = "net.micode.notes.gtask.remote.gtask_sync_service";
 
     public final static String GTASK_SERVICE_BROADCAST_IS_SYNCING = "isSyncing";
-
     public final static String GTASK_SERVICE_BROADCAST_PROGRESS_MSG = "progressMsg";
 
     private static GTaskASyncTask mSyncTask = null;
-
     private static String mSyncProgress = "";
 
     private void startSync() {
@@ -97,6 +96,10 @@ public class GTaskSyncService extends Service {
         return null;
     }
 
+    /**
+     * 发送广播通知同步状态变化。
+     * @param msg 进度消息
+     */
     public void sendBroadcast(String msg) {
         mSyncProgress = msg;
         Intent intent = new Intent(GTASK_SERVICE_BROADCAST_NAME);
@@ -105,6 +108,10 @@ public class GTaskSyncService extends Service {
         sendBroadcast(intent);
     }
 
+    /**
+     * 启动同步。
+     * @param activity 用于获取认证令牌的 Activity
+     */
     public static void startSync(Activity activity) {
         GTaskManager.getInstance().setActivityContext(activity);
         Intent intent = new Intent(activity, GTaskSyncService.class);
@@ -112,6 +119,10 @@ public class GTaskSyncService extends Service {
         activity.startService(intent);
     }
 
+    /**
+     * 取消同步。
+     * @param context 上下文
+     */
     public static void cancelSync(Context context) {
         Intent intent = new Intent(context, GTaskSyncService.class);
         intent.putExtra(GTaskSyncService.ACTION_STRING_NAME, GTaskSyncService.ACTION_CANCEL_SYNC);
