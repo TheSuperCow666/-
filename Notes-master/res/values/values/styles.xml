@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <!-- 便签字号文本外观样式：不同字号统一配置链接文字色为蓝色(#0000ff) -->
+    <style name="TextAppearanceSuper">
+        <item name="android:textSize">@dimen/text_font_size_super</item>  <!-- 超大字号 -->
+        <item name="android:textColorLink">#0000ff</item>                <!-- 链接文字色：蓝色 -->
+    </style>
+    <style name="TextAppearanceLarge">
+        <item name="android:textSize">@dimen/text_font_size_large</item>  <!-- 大字号 -->
+        <item name="android:textColorLink">#0000ff</item>                <!-- 链接文字色：蓝色 -->
+    </style>
+    <style name="TextAppearanceMedium">
+        <item name="android:textSize">@dimen/text_font_size_medium</item> <!-- 中字号 -->
+        <item name="android:textColorLink">#0000ff</item>                <!-- 链接文字色：蓝色 -->
+    </style>
+    <style name="TextAppearanceNormal">
+        <item name="android:textSize">@dimen/text_font_size_normal</item> <!-- 正常字号 -->
+        <item name="android:textColorLink">#0000ff</item>                <!-- 链接文字色：蓝色 -->
+    </style>
+
+    <!-- 列表项主文本样式：正常字号+深色主文本色 -->
+    <style name="TextAppearancePrimaryItem">
+        <item name="android:textSize">@dimen/text_font_size_normal</item> <!-- 正常字号 -->
+        <item name="android:textColor">@color/primary_text_dark</item>    <!-- 主文本深色 -->
+    </style>
+
+    <!-- 列表项次文本样式：小字号+深色次文本色 -->
+    <style name="TextAppearanceSecondaryItem">
+        <item name="android:textSize">@dimen/text_font_size_small</item>  <!-- 小字号 -->
+        <item name="android:textColor">@color/secondary_text_dark</item>  <!-- 次文本深色 -->
+    </style>
+
+    <!-- 菜单图标下方文本样式：正常字号+黑色文字 -->
+    <style name="TextAppearanceUnderMenuIcon">
+        <item name="android:textSize">@dimen/text_font_size_normal</item> <!-- 正常字号 -->
+        <item name="android:textColor">@android:color/black</item>        <!-- 系统黑色 -->
+    </style>
+
+    <!-- 高亮文本主样式：正常字号+深色主文本色（与列表项主文本样式一致） -->
+    <style name="HighlightTextAppearancePrimary">
+        <item name="android:textSize">@dimen/text_font_size_normal</item> <!-- 正常字号 -->
+        <item name="android:textColor">@color/primary_text_dark</item>    <!-- 主文本深色 -->
+    </style>
+
+    <!-- 高亮文本次样式：小字号+深色次文本色（与列表项次文本样式一致） -->
+    <style name="HighlightTextAppearanceSecondary">
+        <item name="android:textSize">@dimen/text_font_size_small</item>  <!-- 小字号 -->
+        <item name="android:textColor">@color/secondary_text_dark</item>  <!-- 次文本深色 -->
+    </style>
+
+    <!-- 便签应用主题：继承Holo浅色主题，自定义ActionBar样式 -->
+    <style name="NoteTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/NoteActionBarStyle</item> <!-- 自定义ActionBar样式 -->
+    </style>
+
+    <!-- 便签ActionBar样式：继承Holo浅色ActionBar，隐藏ActionBar -->
+    <style name="NoteActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:displayOptions" />                            <!-- 清空ActionBar显示选项 -->
+        <item name="android:visibility">gone</item>                       <!-- 隐藏ActionBar -->
+    </style>
+</resources>
