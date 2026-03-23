@@ -15,9 +15,12 @@
      limitations under the License.
 -->
 
+<!-- 新建便签按钮的背景状态选择器 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按钮按下状态：使用new_note_pressed作为背景 -->
     <item android:state_pressed="true"
         android:drawable="@drawable/new_note_pressed" />
+     <!-- 按钮默认状态（未按下）：使用new_note_normal作为背景 -->
     <item
         android:drawable="@drawable/new_note_normal" />
 </selector>
